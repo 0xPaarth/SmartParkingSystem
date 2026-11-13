@@ -1,6 +1,8 @@
 package com.parking.domain.model;
 
 public class User {
+  private String id;
+  private String name;
   private Wallet wallet = new Wallet();
   private LoyaltyAccount loyaltyAccount = new LoyaltyAccount();
 
@@ -19,4 +21,8 @@ public class User {
   public void setLoyaltyAccount(LoyaltyAccount loyaltyAccount) {
     this.loyaltyAccount = loyaltyAccount;
   }
+  public String getId() { return id; }
+  public void setId(String id) { this.id = id; }
+  public String getName() { return name; }
+  public void setName(String name) { this.name = name; }
 }
