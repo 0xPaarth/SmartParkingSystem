@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.parking.app.controller.AdminPricingController" spacing="8">
+  <Label text="Pricing configuration" styleClass="page-title"/>
+  <GridPane hgap="8" vgap="8"><Label text="Compact INR" GridPane.rowIndex="0"/><TextField fx:id="compactRate" GridPane.columnIndex="1"/>
+    <Label text="Standard INR" GridPane.rowIndex="1"/><TextField fx:id="standardRate" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+    <Label text="Surge" GridPane.rowIndex="2"/><TextField fx:id="surgeRate" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+    <Label text="Peak hours" GridPane.rowIndex="3"/><TextField fx:id="peakRate" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+    <Label text="GST" GridPane.rowIndex="4"/><TextField fx:id="gstRate" GridPane.columnIndex="1" GridPane.rowIndex="4"/></GridPane>
+  <HBox spacing="8"><Button text="Save" onAction="#save"/><Button text="Simulate 1 hour" onAction="#simulate"/><Button text="Back" onAction="#back"/><Label fx:id="simulatorResult"/></HBox>
+</VBox>

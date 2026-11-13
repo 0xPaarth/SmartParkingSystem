@@ -1,6 +1,7 @@
 package com.parking.domain.service;
 
 import com.parking.domain.model.ParkingSession;
+import com.parking.domain.model.PricingConfig;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -9,11 +10,12 @@ import java.util.List;
 public class PricingService {
   private final List<PricingStrategy> strategies;
 
-  public PricingService() {
-    strategies = List.of(new BaseRateStrategy(), new SurgeStrategy(), new PeakHourStrategy(),
-        new WeekendHolidayStrategy(), new EvDiscountStrategy(), new ReservationFeeStrategy(),
+  public PricingService() { this(PricingConfig.defaults()); }
+  public PricingService(PricingConfig config) {
+    strategies = List.of(new BaseRateStrategy(config), new SurgeStrategy(config), new PeakHourStrategy(config),
+        new WeekendHolidayStrategy(config), new EvDiscountStrategy(config), new ReservationFeeStrategy(config),
         new PromoCodeStrategy(), new LoyaltyRedemptionStrategy(), new OverstayPenaltyStrategy(),
-        new TaxStrategy());
+        new TaxStrategy(config));
   }
 
   public List<PricingStrategy> getStrategies() { return strategies; }

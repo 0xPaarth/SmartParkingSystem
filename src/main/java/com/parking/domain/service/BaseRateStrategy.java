@@ -2,6 +2,7 @@ package com.parking.domain.service;
 
 import com.parking.domain.enums.SlotType;
 import com.parking.domain.model.ParkingSession;
+import com.parking.domain.model.PricingConfig;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
@@ -14,12 +15,11 @@ public final class BaseRateStrategy implements PricingStrategy {
 
   @Override public BigDecimal calculate(ParkingSession session) {
     SlotType type = session.getSlot() == null ? SlotType.STANDARD : session.getSlot().getType();
-    BigDecimal hourly = switch (type) {
-      case COMPACT -> HOURLY_COMPACT; case STANDARD -> HOURLY_STANDARD;
-      case LARGE -> HOURLY_LARGE; case ACCESSIBLE -> HOURLY_ACCESSIBLE;
-      case ELECTRIC -> HOURLY_ELECTRIC;
-    };
+    BigDecimal hourly = config.getHourlyRates().getOrDefault(type, HOURLY_STANDARD);
     long hours = Math.max(1, (session.durationMinutes() + 59) / 60);
     return hourly.multiply(BigDecimal.valueOf(hours)).setScale(2, RoundingMode.HALF_UP);
   }
 }
+  private final PricingConfig config;
+  public BaseRateStrategy() { this(PricingConfig.defaults()); }
+  public BaseRateStrategy(PricingConfig config) { this.config = config; }

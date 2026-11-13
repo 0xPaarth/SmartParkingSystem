@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.parking.app.controller.AdminReportsController">
+  <top><HBox spacing="8"><Label text="Audit log &amp; reports" styleClass="page-title"/><Button text="Export CSV" onAction="#exportCsv"/><Button text="Export PDF" onAction="#exportPdf"/><Button text="Back" onAction="#back"/></HBox></top>
+  <center><TableView fx:id="auditTable"><columns><TableColumn fx:id="timestampColumn" text="Timestamp"/><TableColumn fx:id="actionColumn" text="Action"/><TableColumn fx:id="targetColumn" text="Target"/><TableColumn fx:id="detailsColumn" text="Details"/></columns></TableView></center>
+</BorderPane>
