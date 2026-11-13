@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.parking.app.controller.AdminDashboardController"
+            styleClass="dashboard-view">
+  <left><fx:include source="sidebar-nav.fxml"/></left>
+  <top><VBox styleClass="top-bar"><Label text="Administrator Dashboard" styleClass="page-title"/><Label text="System health and management tools" styleClass="subtitle"/></VBox></top>
+  <center><VBox spacing="16" styleClass="dashboard-content"><Label text="Administration overview" styleClass="section-title"/><Label text="User management, pricing, audit, and reporting screens will be added in later phases." wrapText="true"/></VBox></center>
+</BorderPane>
