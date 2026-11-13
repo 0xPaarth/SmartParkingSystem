@@ -1,0 +1,18 @@
+sequenceDiagram
+  actor Driver
+  participant ReservationController
+  participant ReservationViewModel
+  participant ReservationService
+  participant PersistenceState
+  participant PricingService
+  Driver->>ReservationController: Enter driver and choose slot
+  ReservationController->>ReservationViewModel: update fields
+  ReservationViewModel->>PricingService: quote selected slot
+  PricingService-->>ReservationViewModel: line items and total
+  Driver->>ReservationController: Confirm reservation
+  ReservationController->>ReservationViewModel: confirm()
+  ReservationViewModel->>ReservationService: create(reservations, driverId, slotId)
+  ReservationService->>PersistenceState: check confirmed slot conflicts
+  PersistenceState-->>ReservationService: slot available
+  ReservationService-->>ReservationViewModel: CONFIRMED Reservation
+  ReservationViewModel-->>ReservationController: confirmation ID

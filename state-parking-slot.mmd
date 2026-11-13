@@ -1,0 +1,8 @@
+stateDiagram-v2
+  [*] --> AVAILABLE
+  AVAILABLE --> OCCUPIED: occupy()
+  OCCUPIED --> AVAILABLE: release()
+  AVAILABLE --> OUT_OF_SERVICE: takeOutOfService()
+  OUT_OF_SERVICE --> AVAILABLE: restore()
+  OCCUPIED --> OCCUPIED: invalid transition -> InvalidSlotStateException
+  OUT_OF_SERVICE --> OUT_OF_SERVICE: invalid transition -> InvalidSlotStateException

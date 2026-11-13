@@ -1,0 +1,18 @@
+sequenceDiagram
+  actor Attendant
+  participant CheckInController
+  participant CheckInViewModel
+  participant PersistenceState
+  participant ParkingSlot
+  participant ParkingSession
+  Attendant->>CheckInController: Enter reservation, driver, or plate
+  CheckInController->>CheckInViewModel: find()
+  CheckInViewModel->>PersistenceState: Search reservations and sessions
+  PersistenceState-->>CheckInViewModel: Matching reservation/session/slot
+  Attendant->>CheckInController: Generate QR ticket
+  CheckInController->>CheckInViewModel: generateTicket()
+  CheckInViewModel->>ParkingSlot: verify AVAILABLE
+  CheckInViewModel->>ParkingSlot: occupy()
+  CheckInViewModel->>ParkingSession: create ticket session
+  CheckInViewModel->>PersistenceState: add session
+  CheckInViewModel-->>CheckInController: ticket ID

@@ -1,10 +1,33 @@
 flowchart TD
-  SPLASH[Splash] --> LOGIN[Login]
-  LOGIN --> ADM_OVER[Admin overview]
-  LOGIN --> DRV_DASH[Driver dashboard]
-  ADM_OVER -->|notifications center| NOTIFICATIONS[Notifications]
-  ADM_OVER -->|users| USERS[Users]
-  ADM_OVER -->|settings| SETTINGS[Settings]
-  DRV_DASH -->|parking| PARKING[Parking]
-  DRV_DASH -->|reservations| RESERVATIONS[Reservations]
-  DRV_DASH -->|payments| PAYMENTS[Payments]
+  Splash[Splash] --> Login[Login]
+  Login -->|DRIVER| DriverDashboard[Driver dashboard]
+  Login -->|ATTENDANT| AttendantDashboard[Attendant dashboard]
+  Login -->|ADMINISTRATOR| AdminDashboard[Admin dashboard]
+  DriverDashboard --> SlotMap[Slot map]
+  DriverDashboard --> CheckIn[Check in]
+  DriverDashboard --> Reservations[Reservations]
+  DriverDashboard --> Checkout[Check out & payment]
+  DriverDashboard --> Transactions[Transactions]
+  DriverDashboard --> Notifications[Notifications]
+  AttendantDashboard --> SlotMap
+  AttendantDashboard --> CheckIn
+  AttendantDashboard --> Reservations
+  AttendantDashboard --> Checkout
+  AttendantDashboard --> Transactions
+  AttendantDashboard --> Notifications
+  AdminDashboard --> AdminSlots[Slot management]
+  AdminDashboard --> AdminPricing[Pricing configuration]
+  AdminDashboard --> AdminUsers[User management]
+  AdminDashboard --> AdminReports[Audit & reports]
+  AdminDashboard --> Notifications
+  SlotMap --> DriverDashboard
+  CheckIn --> DriverDashboard
+  Reservations --> DriverDashboard
+  Checkout --> DriverDashboard
+  Transactions --> DriverDashboard
+  Notifications --> DriverDashboard
+  AdminSlots --> AdminDashboard
+  AdminPricing --> AdminDashboard
+  AdminUsers --> AdminDashboard
+  AdminReports --> AdminDashboard
+  Login -->|logout| Splash

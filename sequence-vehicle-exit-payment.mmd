@@ -1,0 +1,16 @@
+sequenceDiagram
+  actor Driver
+  participant CheckoutPaymentController
+  participant CheckoutPaymentViewModel
+  participant PersistenceState
+  participant PricingService
+  Driver->>CheckoutPaymentController: Enter ticket/session ID
+  CheckoutPaymentController->>CheckoutPaymentViewModel: find()
+  CheckoutPaymentViewModel->>PersistenceState: Find session
+  PersistenceState-->>CheckoutPaymentViewModel: ParkingSession
+  CheckoutPaymentViewModel->>PricingService: calculate(session)
+  PricingService-->>CheckoutPaymentViewModel: ten-step PricingResult
+  Driver->>CheckoutPaymentController: Select payment method
+  Driver->>CheckoutPaymentController: Generate receipt
+  CheckoutPaymentController->>CheckoutPaymentViewModel: generateReceipt()
+  CheckoutPaymentViewModel-->>CheckoutPaymentController: receipt text with method and total
