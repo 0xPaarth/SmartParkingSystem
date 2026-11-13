@@ -1,5 +1,8 @@
 package com.parking.app.navigation;
 
+import com.parking.app.context.AppContext;
+import com.parking.app.control.ToastNotification;
+import com.parking.app.events.NotificationEvent;
 import com.parking.domain.enums.Role;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,12 +27,16 @@ public final class NavigationManager {
   public static final String CHECK_IN = "check-in";
   public static final String CHECKOUT = "checkout";
   public static final String TRANSACTIONS = "transactions";
+  public static final String NOTIFICATIONS = "notifications";
 
   private final Stage stage;
   private String currentView;
+  private boolean darkTheme;
 
   public NavigationManager(Stage stage) {
     this.stage = Objects.requireNonNull(stage);
+    AppContext.EVENT_BUS.subscribe(NotificationEvent.class,
+        event -> javafx.application.Platform.runLater(() -> ToastNotification.show(stage, event)));
   }
 
   public String getCurrentView() {
@@ -53,10 +60,24 @@ public final class NavigationManager {
       } else {
         stage.getScene().setRoot(root);
       }
+      applyTheme();
       currentView = view;
     } catch (IOException exception) {
       throw new IllegalStateException("Unable to load view " + view, exception);
     }
+  }
+
+  public void toggleTheme() {
+    darkTheme = !darkTheme;
+    applyTheme();
+  }
+
+  private void applyTheme() {
+    if (stage.getScene() == null) return;
+    String theme = darkTheme ? "dark.css" : "light.css";
+    String stylesheet = Objects.requireNonNull(
+        getClass().getResource("/com/parking/app/theme/" + theme)).toExternalForm();
+    stage.getScene().getStylesheets().setAll(stylesheet);
   }
 
   public void navigateForRole(Role role) {

@@ -10,6 +10,8 @@
   <Button text="Reservations" maxWidth="Infinity" onAction="#openReservations" styleClass="nav-button"/>
   <Button text="Check out &amp; payment" maxWidth="Infinity" onAction="#openCheckout" styleClass="nav-button"/>
   <Button text="Transactions" maxWidth="Infinity" onAction="#openTransactions" styleClass="nav-button"/>
+  <Button text="Notifications" maxWidth="Infinity" onAction="#openNotifications" styleClass="nav-button"/>
   <VBox VBox.vgrow="ALWAYS"/>
+  <Button text="Toggle light/dark theme" maxWidth="Infinity" onAction="#toggleTheme" styleClass="nav-button"/>
   <Button text="Log out" maxWidth="Infinity" onAction="#logout" styleClass="nav-button"/>
 </VBox>

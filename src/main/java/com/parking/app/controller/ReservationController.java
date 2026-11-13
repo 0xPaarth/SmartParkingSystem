@@ -2,6 +2,9 @@ package com.parking.app.controller;
 
 import com.parking.app.context.ParkingAppState;
 import com.parking.app.navigation.NavigationManager;
+import com.parking.app.context.AppContext;
+import com.parking.app.events.NotificationEvent;
+import com.parking.app.util.ErrorDialogs;
 import com.parking.app.viewmodel.ReservationViewModel;
 import com.parking.domain.model.ParkingSlot;
 import com.parking.domain.service.PricingLineItem;
@@ -40,7 +43,12 @@ public final class ReservationController extends BaseController {
     });
   }
   @FXML private void confirm() {
-    try { resultLabel.setText("Confirmed " + viewModel.confirm().getId()); }
-    catch (IllegalStateException ex) { resultLabel.setText(ex.getMessage()); }
+    try {
+      resultLabel.setText("Confirmed " + viewModel.confirm().getId());
+      AppContext.EVENT_BUS.publish(new NotificationEvent("Reservation confirmed",
+          "Your parking reservation was created successfully.", com.parking.domain.enums.NotificationType.INFO));
+    } catch (RuntimeException ex) {
+      ErrorDialogs.show(resultLabel.getScene().getWindow(), ex);
+    }
   }
 }

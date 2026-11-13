@@ -9,8 +9,6 @@ public class MainApp extends Application {
     stage.setTitle("Parking Management");
     NavigationManager navigationManager = new NavigationManager(stage);
     navigationManager.navigateTo(NavigationManager.SPLASH);
-    stage.getScene().getStylesheets().add(
-        getClass().getResource("/com/parking/app/theme/light.css").toExternalForm());
     stage.show();
   }
 

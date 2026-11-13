@@ -2,6 +2,9 @@ package com.parking.app.controller;
 
 import com.parking.app.context.ParkingAppState;
 import com.parking.app.navigation.NavigationManager;
+import com.parking.app.context.AppContext;
+import com.parking.app.events.NotificationEvent;
+import com.parking.app.util.ErrorDialogs;
 import com.parking.app.viewmodel.CheckoutPaymentViewModel;
 import com.parking.domain.enums.PaymentMethod;
 import com.parking.domain.service.PricingLineItem;
@@ -30,7 +33,12 @@ public final class CheckoutPaymentController extends BaseController {
     });
   }
   @FXML private void generateReceipt() {
-    try { receiptLabel.setText(viewModel.generateReceipt()); }
-    catch (IllegalStateException ex) { receiptLabel.setText(ex.getMessage()); }
+    try {
+      receiptLabel.setText(viewModel.generateReceipt());
+      AppContext.EVENT_BUS.publish(new NotificationEvent("Payment successful",
+          "Payment was recorded and the receipt is ready.", com.parking.domain.enums.NotificationType.INFO));
+    } catch (RuntimeException ex) {
+      ErrorDialogs.show(receiptLabel.getScene().getWindow(), ex);
+    }
   }
 }

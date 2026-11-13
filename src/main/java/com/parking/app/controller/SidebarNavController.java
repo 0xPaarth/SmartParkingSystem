@@ -18,4 +18,6 @@ public final class SidebarNavController extends BaseController {
   @FXML private void openCheckIn() { navigationManager.navigateTo(NavigationManager.CHECK_IN); }
   @FXML private void openCheckout() { navigationManager.navigateTo(NavigationManager.CHECKOUT); }
   @FXML private void openTransactions() { navigationManager.navigateTo(NavigationManager.TRANSACTIONS); }
+  @FXML private void openNotifications() { navigationManager.navigateTo(NavigationManager.NOTIFICATIONS); }
+  @FXML private void toggleTheme() { navigationManager.toggleTheme(); }
 }

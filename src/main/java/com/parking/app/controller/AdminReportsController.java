@@ -20,6 +20,9 @@ public final class AdminReportsController extends BaseController {
   @FXML private TableColumn<AuditEntry, String> actionColumn;
   @FXML private TableColumn<AuditEntry, String> targetColumn;
   @FXML private TableColumn<AuditEntry, String> detailsColumn;
+  @FXML private ProgressIndicator progressIndicator;
+  @FXML private Button csvButton;
+  @FXML private Button pdfButton;
   private final AuditReportsViewModel viewModel =
       new AuditReportsViewModel(new ReportService(AuditService.shared()));
   public AdminReportsController(NavigationManager navigationManager) { super(navigationManager); }
@@ -36,11 +39,27 @@ public final class AdminReportsController extends BaseController {
     FileChooser chooser = new FileChooser();
     chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(extension.toUpperCase(), pattern));
     var file = chooser.showSaveDialog(auditTable.getScene().getWindow());
-    if (file != null) try (FileOutputStream output = new FileOutputStream(file)) {
-      viewModel.export(exporter, output);
+    if (file == null) return;
+    final FileOutputStream output;
+    try {
+      output = new FileOutputStream(file);
     } catch (IOException exception) {
-      throw new IllegalStateException("Unable to export report", exception);
+      com.parking.app.util.ErrorDialogs.show(auditTable.getScene().getWindow(), exception);
+      return;
     }
+    var task = viewModel.exportAsync(exporter, output);
+    progressIndicator.visibleProperty().bind(task.runningProperty());
+    csvButton.disableProperty().bind(task.runningProperty());
+    pdfButton.disableProperty().bind(task.runningProperty());
+    task.setOnSucceeded(event -> close(output));
+    task.setOnFailed(event -> {
+      close(output);
+      com.parking.app.util.ErrorDialogs.show(auditTable.getScene().getWindow(), task.getException());
+    });
+    new Thread(task, "report-export").start();
+  }
+  private static void close(FileOutputStream output) {
+    try { output.close(); } catch (IOException ignored) { }
   }
   @FXML private void back() { navigationManager.navigateTo(NavigationManager.ADMIN_DASHBOARD); }
 }
