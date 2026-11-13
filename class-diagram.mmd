@@ -1,0 +1,19 @@
+classDiagram
+  class User
+  class Wallet { +balance: BigDecimal }
+  class LoyaltyAccount { +points: int }
+  class ParkingLot { +id; +name; +levels: List~ParkingLevel~ }
+  class ParkingLevel { +levelNumber: int; +slots: List~ParkingSlot~ }
+  class ParkingSlot { +id; +type: SlotType; +state: SlotState }
+  class Vehicle
+  class ParkingSession
+  class Reservation
+  class Transaction
+  User "1" *-- "1" Wallet
+  User "1" *-- "1" LoyaltyAccount
+  ParkingLot "1" *-- "1..*" ParkingLevel : levels
+  ParkingLevel "1" *-- "0..*" ParkingSlot : slots
+  Vehicle "1" -- "*" ParkingSession
+  ParkingSession "0..1" -- "1" ParkingSlot
+  Reservation "*" -- "1" Vehicle
+  Transaction "*" -- "1" ParkingSession

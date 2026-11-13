@@ -1,0 +1,10 @@
+flowchart TD
+  SPLASH[Splash] --> LOGIN[Login]
+  LOGIN --> ADM_OVER[Admin overview]
+  LOGIN --> DRV_DASH[Driver dashboard]
+  ADM_OVER -->|notifications center| NOTIFICATIONS[Notifications]
+  ADM_OVER -->|users| USERS[Users]
+  ADM_OVER -->|settings| SETTINGS[Settings]
+  DRV_DASH -->|parking| PARKING[Parking]
+  DRV_DASH -->|reservations| RESERVATIONS[Reservations]
+  DRV_DASH -->|payments| PAYMENTS[Payments]

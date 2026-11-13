@@ -1,0 +1,16 @@
+flowchart LR
+  UCAudit((Audit))
+  UCSlotCrud[Slot CRUD]
+  UCPriceCfg[Configure pricing]
+  UCUsers[Manage users]
+  UCForce[Force actions]
+  UCRefund[Refund payment]
+  UCEmerg[Emergency mode]
+  UCEmergAdmin[Admin emergency mode]
+  UCSlotCrud -.->|includes| UCAudit
+  UCPriceCfg -.->|includes| UCAudit
+  UCUsers -.->|includes| UCAudit
+  UCForce -.->|includes| UCAudit
+  UCRefund -.->|includes| UCAudit
+  UCEmerg -.->|includes| UCAudit
+  UCEmergAdmin -.->|includes| UCAudit
