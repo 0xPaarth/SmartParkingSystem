@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.parking.app.controller.AdminDashboardController"
+            styleClass="dashboard-view">
+  <left><fx:include source="sidebar-nav.fxml"/></left>
+  <top><VBox styleClass="top-bar"><Label text="Administrator Dashboard" styleClass="page-title"/><Label text="System health and management tools" styleClass="subtitle"/></VBox></top>
+  <center><VBox spacing="12" styleClass="dashboard-content">
+    <Label text="Administration overview" styleClass="section-title"/>
+    <GridPane hgap="8" vgap="8">
+      <Button text="Slot management" onAction="#openSlots" GridPane.columnIndex="0"/>
+      <Button text="Pricing configuration" onAction="#openPricing" GridPane.columnIndex="1"/>
+      <Button text="User management" onAction="#openUsers" GridPane.columnIndex="2"/>
+      <Button text="Audit &amp; reports" onAction="#openReports" GridPane.columnIndex="3"/>
+    </GridPane>
+    <GridPane hgap="12" vgap="12">
+      <LineChart fx:id="revenueChart" title="Revenue" GridPane.columnIndex="0"><xAxis><CategoryAxis/></xAxis><yAxis><NumberAxis/></yAxis></LineChart>
+      <BarChart fx:id="occupancyChart" title="Occupancy" GridPane.columnIndex="1"><xAxis><CategoryAxis/></xAxis><yAxis><NumberAxis/></yAxis></BarChart>
+      <PieChart fx:id="slotTypesChart" title="Slot types" GridPane.columnIndex="2"/>
+    </GridPane>
+  </VBox></center>
+</BorderPane>

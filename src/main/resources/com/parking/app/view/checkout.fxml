@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.parking.app.controller.CheckoutPaymentController" styleClass="dashboard-view">
+  <left><fx:include source="sidebar-nav.fxml"/></left>
+  <center><VBox spacing="12" styleClass="dashboard-content">
+    <Label text="Check out &amp; payment" styleClass="page-title"/>
+    <TextField fx:id="ticketField" promptText="Ticket ID"/>
+    <ComboBox fx:id="methodBox" promptText="Payment method"/>
+    <ListView fx:id="priceList" prefHeight="180"/>
+    <Label fx:id="totalLabel" text="Amount due: 0.00"/>
+    <Button text="Generate receipt" onAction="#generateReceipt"/>
+    <Label fx:id="receiptLabel"/>
+  </VBox></center>
+</BorderPane>

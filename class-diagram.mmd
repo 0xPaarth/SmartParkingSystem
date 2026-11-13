@@ -1,0 +1,59 @@
+classDiagram
+  class MainApp
+  class NavigationManager
+  class ParkingAppState
+  class SeedDataLoader
+  class User
+  class Wallet
+  class LoyaltyAccount
+  class Vehicle
+  class ParkingLot
+  class ParkingLevel
+  class ParkingSlot
+  class ParkingSession
+  class Reservation
+  class Transaction
+  class ParkingService
+  class ReservationService
+  class PricingService
+  class PricingStrategy
+  class BaseRateStrategy
+  class TaxStrategy
+  class SlotState
+  class AvailableState
+  class OccupiedState
+  class OutOfServiceState
+  class PaymentProcessor
+  class Repository
+  class InMemoryRepositoryImpl
+  class JsonRepositoryImpl
+  class EventBus
+  class ParkingException
+  User "1" *-- "1" Wallet
+  User "1" *-- "1" LoyaltyAccount
+  ParkingLot "1" *-- "1..*" ParkingLevel
+  ParkingLevel "1" *-- "0..*" ParkingSlot
+  Vehicle "1" --> "0..*" ParkingSession
+  ParkingSession "0..*" --> "1" ParkingSlot
+  ParkingSession "0..*" --> "0..1" User
+  User "1" --> "0..*" Reservation : driverId
+  ParkingService --> PricingService
+  ReservationService --> Reservation
+  PricingService --> PricingStrategy
+  PricingStrategy <|.. BaseRateStrategy
+  PricingStrategy <|.. TaxStrategy
+  ParkingSlot --> SlotState
+  SlotState <|.. AvailableState
+  SlotState <|.. OccupiedState
+  SlotState <|.. OutOfServiceState
+  Repository <|.. InMemoryRepositoryImpl
+  Repository <|.. JsonRepositoryImpl
+  JsonRepositoryImpl --> InMemoryRepositoryImpl : delegates
+  NavigationManager --> MainApp
+  ParkingAppState --> SeedDataLoader
+  EventBus ..> NotificationEvent
+  ParkingException <|-- InvalidSlotStateException
+  ParkingException <|-- SlotUnavailableException
+  ParkingException <|-- ReservationConflictException
+  ParkingException <|-- DataPersistenceException
+  ParkingException <|-- InvalidPaymentException

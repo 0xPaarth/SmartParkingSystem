@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.parking.app.controller.AdminSlotManagementController">
+  <top><HBox spacing="8"><Label text="Slot management" styleClass="page-title"/><Button text="Add" onAction="#addSlot"/><Button text="Delete" onAction="#deleteSlot"/><Button text="Maintenance" onAction="#toggleMaintenance"/><Button text="Import CSV" onAction="#importCsv"/><Button text="Back" onAction="#back"/></HBox></top>
+  <center><TableView fx:id="slotsTable"><columns><TableColumn fx:id="idColumn" text="ID"/><TableColumn fx:id="typeColumn" text="Type"/><TableColumn fx:id="stateColumn" text="State"/><TableColumn fx:id="statusColumn" text="Status"/></columns></TableView></center>
+</BorderPane>

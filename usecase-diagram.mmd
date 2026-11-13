@@ -1,0 +1,31 @@
+flowchart LR
+  Driver([Driver])
+  Attendant([Attendant])
+  Admin([Administrator])
+  Login((Log in))
+  ViewSlots((View slot map))
+  Reserve((Create reservation))
+  CheckIn((Check in / generate ticket))
+  Checkout((Check out and pay))
+  Receipt((Generate receipt))
+  Notify((Receive notifications))
+  ManageSlots((Manage slots))
+  ConfigurePricing((Configure pricing))
+  ManageUsers((Manage users))
+  Reports((View/export audit reports))
+  Driver --> Login
+  Attendant --> Login
+  Admin --> Login
+  Login --> ViewSlots
+  Driver --> Reserve
+  Attendant --> CheckIn
+  Driver --> Checkout
+  Checkout --> Receipt
+  Driver --> Notify
+  Attendant --> Notify
+  Admin --> ManageSlots
+  Admin --> ConfigurePricing
+  Admin --> ManageUsers
+  Admin --> Reports
+  Reserve -.->|prices with| ConfigurePricing
+  Checkout -.->|uses| ConfigurePricing

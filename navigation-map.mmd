@@ -1,0 +1,33 @@
+flowchart TD
+  Splash[Splash] --> Login[Login]
+  Login -->|DRIVER| DriverDashboard[Driver dashboard]
+  Login -->|ATTENDANT| AttendantDashboard[Attendant dashboard]
+  Login -->|ADMINISTRATOR| AdminDashboard[Admin dashboard]
+  DriverDashboard --> SlotMap[Slot map]
+  DriverDashboard --> CheckIn[Check in]
+  DriverDashboard --> Reservations[Reservations]
+  DriverDashboard --> Checkout[Check out & payment]
+  DriverDashboard --> Transactions[Transactions]
+  DriverDashboard --> Notifications[Notifications]
+  AttendantDashboard --> SlotMap
+  AttendantDashboard --> CheckIn
+  AttendantDashboard --> Reservations
+  AttendantDashboard --> Checkout
+  AttendantDashboard --> Transactions
+  AttendantDashboard --> Notifications
+  AdminDashboard --> AdminSlots[Slot management]
+  AdminDashboard --> AdminPricing[Pricing configuration]
+  AdminDashboard --> AdminUsers[User management]
+  AdminDashboard --> AdminReports[Audit & reports]
+  AdminDashboard --> Notifications
+  SlotMap --> DriverDashboard
+  CheckIn --> DriverDashboard
+  Reservations --> DriverDashboard
+  Checkout --> DriverDashboard
+  Transactions --> DriverDashboard
+  Notifications --> DriverDashboard
+  AdminSlots --> AdminDashboard
+  AdminPricing --> AdminDashboard
+  AdminUsers --> AdminDashboard
+  AdminReports --> AdminDashboard
+  Login -->|logout| Splash

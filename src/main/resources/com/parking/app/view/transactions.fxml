@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.parking.app.controller.TransactionsController" styleClass="dashboard-view">
+  <left><fx:include source="sidebar-nav.fxml"/></left>
+  <center><VBox spacing="12" styleClass="dashboard-content">
+    <Label text="Transactions" styleClass="page-title"/>
+    <HBox spacing="8"><TextField fx:id="searchField" promptText="Search transactions" HBox.hgrow="ALWAYS"/><Button text="Export CSV" onAction="#export"/></HBox>
+    <TableView fx:id="table" VBox.vgrow="ALWAYS"/>
+    <Label fx:id="statusLabel"/>
+  </VBox></center>
+</BorderPane>

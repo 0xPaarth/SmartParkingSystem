@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.parking.app.controller.DriverDashboardController"
+            styleClass="dashboard-view">
+  <left><fx:include source="sidebar-nav.fxml"/></left>
+  <top><VBox styleClass="top-bar"><Label text="Driver Dashboard" styleClass="page-title"/><Label text="Your parking at a glance" styleClass="subtitle"/></VBox></top>
+  <center><VBox spacing="16" styleClass="dashboard-content"><Label text="Welcome, Driver" styleClass="section-title"/><Label text="Your active sessions, reservations, and wallet will appear here in a future phase." wrapText="true"/></VBox></center>
+</BorderPane>

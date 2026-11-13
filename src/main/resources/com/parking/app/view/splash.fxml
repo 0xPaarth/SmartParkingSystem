@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.parking.app.controller.SplashController"
+      alignment="CENTER" spacing="18" styleClass="splash-view">
+  <Label text="Parking Management" styleClass="brand-title"/>
+  <Label text="A simple, secure way to manage every parking session." styleClass="subtitle"/>
+  <Button text="Continue" onAction="#continueToLogin" defaultButton="true"/>
+</VBox>

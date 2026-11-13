@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.parking.app.controller.NotificationCenterController" styleClass="dashboard-view">
+  <left><fx:include source="sidebar-nav.fxml"/></left>
+  <top><HBox spacing="12" styleClass="top-bar"><Label text="Notifications" styleClass="page-title"/><Label fx:id="unreadLabel" styleClass="subtitle"/><Button text="Mark all as read" onAction="#markAllRead"/><Button text="Back" onAction="#back"/></HBox></top>
+  <center><ListView fx:id="notificationList"/></center>
+</BorderPane>
