@@ -1,8 +1,8 @@
 package com.parking.app.viewmodel;
 
-import com.parking.domain.enums.ReservationStatus;
 import com.parking.domain.model.ParkingSlot;
 import com.parking.domain.model.Reservation;
+import com.parking.domain.service.ReservationService;
 import com.parking.service.PersistenceState;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
@@ -11,10 +11,10 @@ import javafx.collections.ObservableList;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Objects;
-import java.util.UUID;
 
 public final class ReservationViewModel {
   private final PersistenceState state;
+  private final ReservationService reservationService = new ReservationService();
   private final PriceBreakdownViewModel priceBreakdown = new PriceBreakdownViewModel();
   private final ObjectProperty<LocalDate> date = new SimpleObjectProperty<>(LocalDate.now());
   private final ObjectProperty<LocalTime> time = new SimpleObjectProperty<>(LocalTime.now());
@@ -36,12 +36,6 @@ public final class ReservationViewModel {
   public PriceBreakdownViewModel priceBreakdown() { return priceBreakdown; }
   public Reservation confirm() {
     if (driverId.get().isBlank() || selectedSlot.get() == null) throw new IllegalStateException("Driver and slot are required");
-    Reservation reservation = new Reservation();
-    reservation.setId("reservation-" + UUID.randomUUID());
-    reservation.setDriverId(driverId.get().trim());
-    reservation.setSlotId(selectedSlot.get().getId());
-    reservation.setStatus(ReservationStatus.CONFIRMED);
-    state.getReservations().add(reservation);
-    return reservation;
+    return reservationService.create(state.getReservations(), driverId.get(), selectedSlot.get().getId());
   }
 }

@@ -24,4 +24,19 @@ class SlotStateTest {
     assertThrows(InvalidSlotStateException.class, slot::occupy);
     assertThrows(InvalidSlotStateException.class, slot::release);
   }
+
+  @Test void occupiedSlotCannotBeOccupiedOrTakenOutOfService() {
+    ParkingSlot slot = new ParkingSlot("A-1", com.parking.domain.enums.SlotType.STANDARD);
+    slot.occupy();
+    assertThrows(InvalidSlotStateException.class, slot::occupy);
+    assertThrows(InvalidSlotStateException.class, slot::takeOutOfService);
+  }
+
+  @Test void outOfServiceSlotCannotBeOccupiedReleasedOrTakenOutAgain() {
+    ParkingSlot slot = new ParkingSlot("A-1", com.parking.domain.enums.SlotType.STANDARD);
+    slot.takeOutOfService();
+    assertThrows(InvalidSlotStateException.class, slot::occupy);
+    assertThrows(InvalidSlotStateException.class, slot::release);
+    assertThrows(InvalidSlotStateException.class, slot::takeOutOfService);
+  }
 }

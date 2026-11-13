@@ -56,6 +56,7 @@ public final class AdminReportsController extends BaseController {
       close(output);
       com.parking.app.util.ErrorDialogs.show(auditTable.getScene().getWindow(), task.getException());
     });
+    task.setOnCancelled(event -> close(output));
     new Thread(task, "report-export").start();
   }
   private static void close(FileOutputStream output) {

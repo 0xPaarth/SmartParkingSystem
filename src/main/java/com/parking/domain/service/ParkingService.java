@@ -20,9 +20,12 @@ public class ParkingService {
   public ParkingSlot findSlot(String id) { return slots.get(id); }
   public ParkingSession startSession(Vehicle vehicle, String slotId) {
     ParkingSlot slot = slots.get(slotId);
-    if (slot == null || slot.getState() != com.parking.domain.enums.SlotState.AVAILABLE)
-      throw new SlotUnavailableException("Slot is unavailable: " + slotId);
-    slot.occupy();
+    if (slot == null) throw new SlotUnavailableException("Slot is unavailable: " + slotId);
+    synchronized (slot) {
+      if (slot.getState() != com.parking.domain.enums.SlotState.AVAILABLE)
+        throw new SlotUnavailableException("Slot is unavailable: " + slotId);
+      slot.occupy();
+    }
     ParkingSession session = new ParkingSession();
     session.setId(UUID.randomUUID().toString());
     session.setVehicle(vehicle);
@@ -35,6 +38,7 @@ public class ParkingService {
   public PricingResult endSession(String sessionId) {
     ParkingSession session = sessions.get(sessionId);
     if (session == null) throw new IllegalArgumentException("Unknown session: " + sessionId);
+    if (session.getStatus() == com.parking.domain.enums.SessionStatus.COMPLETED) return quote(session);
     session.setExitTime(Instant.now());
     session.setStatus(com.parking.domain.enums.SessionStatus.COMPLETED);
     if (session.getSlot() != null) session.getSlot().release();

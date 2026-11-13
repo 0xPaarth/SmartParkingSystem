@@ -12,6 +12,15 @@ public final class BaseRateStrategy implements PricingStrategy {
   public static final BigDecimal HOURLY_LARGE = new BigDecimal("70.00");
   public static final BigDecimal HOURLY_ACCESSIBLE = new BigDecimal("50.00");
   public static final BigDecimal HOURLY_ELECTRIC = new BigDecimal("60.00");
+  private final PricingConfig config;
+
+  public BaseRateStrategy() { this(PricingConfig.defaults()); }
+  public BaseRateStrategy(PricingConfig config) {
+    if (config == null || config.getHourlyRates() == null) {
+      throw new IllegalArgumentException("pricing config and hourly rates must not be null");
+    }
+    this.config = config;
+  }
 
   @Override public BigDecimal calculate(ParkingSession session) {
     SlotType type = session.getSlot() == null ? SlotType.STANDARD : session.getSlot().getType();
@@ -20,6 +29,3 @@ public final class BaseRateStrategy implements PricingStrategy {
     return hourly.multiply(BigDecimal.valueOf(hours)).setScale(2, RoundingMode.HALF_UP);
   }
 }
-  private final PricingConfig config;
-  public BaseRateStrategy() { this(PricingConfig.defaults()); }
-  public BaseRateStrategy(PricingConfig config) { this.config = config; }

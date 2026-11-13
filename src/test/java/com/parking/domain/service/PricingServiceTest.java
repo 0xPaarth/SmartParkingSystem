@@ -50,4 +50,54 @@ class PricingServiceTest {
     assertEquals("-10.00", result.lineItem("LoyaltyRedemption").toPlainString());
     assertEquals("100.00", result.lineItem("OverstayPenalty").toPlainString());
   }
+
+  @Test void rejectsNegativeDuration() {
+    ParkingSession session = session(SlotType.STANDARD);
+    session.setExitTime(session.getEntryTime().minusSeconds(1));
+    assertThrows(IllegalArgumentException.class, () -> new PricingService().calculate(session));
+  }
+
+  @Test void pricesMissingSlotAsStandardAndDoesNotChargeForZeroOccupancy() {
+    ParkingSession session = new ParkingSession();
+    session.setSlot(null);
+    session.setEntryTime(Instant.now());
+    session.setExitTime(session.getEntryTime());
+    PricingResult result = new PricingService().calculate(session);
+    assertEquals("59.00", result.getTotal().toPlainString());
+  }
+
+  @Test void capsElectricDiscountAtFreeInsteadOfProducingNegativePrice() {
+    PricingConfig config = PricingConfig.defaults();
+    config.setElectricDiscount(new java.math.BigDecimal("2.00"));
+    ParkingSession session = session(SlotType.ELECTRIC);
+    PricingResult result = new PricingService(config).calculate(session);
+    assertEquals("0.00", result.lineItem("EvDiscount").toPlainString());
+    assertEquals("0.00", result.getTotal().toPlainString());
+  }
+
+  @Test void quotingDoesNotRedeemLoyaltyPoints() {
+    ParkingSession session = session(SlotType.STANDARD);
+    User user = new User();
+    user.setLoyaltyAccount(new LoyaltyAccount("member", 20));
+    session.setUser(user);
+    session.setLoyaltyPointsToRedeem(10);
+    PricingService pricing = new PricingService();
+
+    pricing.calculate(session);
+    pricing.calculate(session);
+
+    assertEquals(20, user.getLoyaltyAccount().getPoints());
+  }
+
+  @Test void loyaltyDiscountCannotExceedAvailablePoints() {
+    ParkingSession session = session(SlotType.STANDARD);
+    User user = new User();
+    user.setLoyaltyAccount(new LoyaltyAccount("member", 2));
+    session.setUser(user);
+    session.setLoyaltyPointsToRedeem(100);
+
+    PricingResult result = new PricingService().calculate(session);
+
+    assertEquals("-2.00", result.lineItem("LoyaltyRedemption").toPlainString());
+  }
 }

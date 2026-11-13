@@ -39,7 +39,9 @@ public class ParkingSession {
   public long getGraceMinutes(){return graceMinutes;} public void setGraceMinutes(long value){this.graceMinutes=Math.max(0,value);}
   public long getOverstayMinutes(){return overstayMinutes;} public void setOverstayMinutes(long value){this.overstayMinutes=Math.max(0,value);}
   public long durationMinutes() {
+    if (entryTime == null) throw new IllegalArgumentException("entry time must not be null");
     Instant end = exitTime == null ? Instant.now() : exitTime;
+    if (end.isBefore(entryTime)) throw new IllegalArgumentException("exit time must not precede entry time");
     return Math.max(1, Duration.between(entryTime, end).toMinutes());
   }
 }

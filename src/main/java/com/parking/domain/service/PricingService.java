@@ -12,6 +12,7 @@ public class PricingService {
 
   public PricingService() { this(PricingConfig.defaults()); }
   public PricingService(PricingConfig config) {
+    if (config == null) throw new IllegalArgumentException("pricing config must not be null");
     strategies = List.of(new BaseRateStrategy(config), new SurgeStrategy(config), new PeakHourStrategy(config),
         new WeekendHolidayStrategy(config), new EvDiscountStrategy(config), new ReservationFeeStrategy(config),
         new PromoCodeStrategy(), new LoyaltyRedemptionStrategy(), new OverstayPenaltyStrategy(),
@@ -22,6 +23,7 @@ public class PricingService {
 
   public PricingResult calculate(ParkingSession session) {
     if (session == null) throw new IllegalArgumentException("session must not be null");
+    session.durationMinutes();
     BigDecimal amount = BigDecimal.ZERO;
     List<PricingLineItem> items = new ArrayList<>();
     for (PricingStrategy strategy : strategies) {

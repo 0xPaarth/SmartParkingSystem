@@ -1,8 +1,6 @@
 package com.parking.domain.model;
 
 import com.parking.domain.enums.*;
-import java.math.BigDecimal;
-import java.util.*;
 
 public class Reservation {
   private String id;

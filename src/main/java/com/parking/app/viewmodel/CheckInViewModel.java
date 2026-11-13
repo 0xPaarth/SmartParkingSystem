@@ -3,6 +3,8 @@ package com.parking.app.viewmodel;
 import com.parking.domain.model.ParkingSession;
 import com.parking.domain.model.ParkingSlot;
 import com.parking.domain.model.Reservation;
+import com.parking.domain.enums.ReservationStatus;
+import com.parking.domain.exception.SlotUnavailableException;
 import com.parking.service.PersistenceState;
 import javafx.beans.property.*;
 
@@ -39,6 +41,12 @@ public final class CheckInViewModel {
   }
   public String generateTicket() {
     if (suggestedSlot.get() == null) throw new IllegalStateException("No slot available");
+    if (suggestedSlot.get().getState() != com.parking.domain.enums.SlotState.AVAILABLE) {
+      throw new SlotUnavailableException("Slot is no longer available: " + suggestedSlot.get().getId());
+    }
+    if (reservation.get() != null && reservation.get().getStatus() != ReservationStatus.CONFIRMED) {
+      throw new IllegalStateException("Reservation is not confirmed");
+    }
     ticket.set("T-" + UUID.randomUUID());
     ParkingSession session = new ParkingSession();
     session.setId(ticket.get());
@@ -46,8 +54,8 @@ public final class CheckInViewModel {
     session.setReserved(reservation.get() != null);
     if (reservation.get() != null) session.setUser(state.getUsers().stream()
         .filter(user -> user.getId().equals(reservation.get().getDriverId())).findFirst().orElse(null));
-    state.getSessions().add(session);
     suggestedSlot.get().occupy();
+    state.getSessions().add(session);
     return ticket.get();
   }
 }

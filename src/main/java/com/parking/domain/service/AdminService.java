@@ -3,6 +3,7 @@ package com.parking.domain.service;
 import com.parking.domain.enums.Role;
 import com.parking.domain.enums.SlotState;
 import com.parking.domain.enums.SlotStatus;
+import com.parking.domain.exception.InvalidSlotStateException;
 import com.parking.domain.model.ParkingSlot;
 import com.parking.domain.model.PricingConfig;
 import com.parking.domain.model.Transaction;
@@ -36,8 +37,17 @@ public final class AdminService {
   public void saveSlot(ParkingSlot slot) { slots.save(slot); }
   public void deleteSlot(String id) { slots.deleteById(id); }
   public void setMaintenance(ParkingSlot slot, boolean maintenance) {
-    slot.setStatus(maintenance ? SlotStatus.INACTIVE : SlotStatus.ACTIVE);
-    slot.setState(maintenance ? SlotState.OUT_OF_SERVICE : SlotState.AVAILABLE);
+    if (slot == null) throw new IllegalArgumentException("slot must not be null");
+    if (maintenance) {
+      if (slot.getState() == SlotState.OCCUPIED) {
+        throw new InvalidSlotStateException("Occupied slot cannot enter maintenance");
+      }
+      if (slot.getState() == SlotState.AVAILABLE) slot.takeOutOfService();
+      slot.setStatus(SlotStatus.INACTIVE);
+    } else {
+      if (slot.getState() == SlotState.OUT_OF_SERVICE) slot.restore();
+      slot.setStatus(SlotStatus.ACTIVE);
+    }
   }
   public void importSlots(Reader source) {
     try (BufferedReader reader = new BufferedReader(source)) {
