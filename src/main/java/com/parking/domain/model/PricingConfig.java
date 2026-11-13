@@ -8,8 +8,8 @@ import java.util.Map;
 public class PricingConfig {
   private Map<SlotType, BigDecimal> hourlyRates = new EnumMap<>(SlotType.class);
   private BigDecimal surgeRate = new BigDecimal("0.25");
-  private BigDecimal peakHourRate = new BigDecimal("0.15");
-  private BigDecimal weekendRate = new BigDecimal("0.10");
+  private BigDecimal peakHourRate = new BigDecimal("0.20");
+  private BigDecimal weekendRate = new BigDecimal("0.15");
   private BigDecimal electricDiscount = new BigDecimal("0.10");
   private BigDecimal reservationFee = new BigDecimal("20.00");
   private BigDecimal gstRate = new BigDecimal("0.18");

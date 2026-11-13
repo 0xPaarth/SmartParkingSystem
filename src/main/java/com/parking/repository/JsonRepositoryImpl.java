@@ -28,13 +28,21 @@ public class JsonRepositoryImpl<T> implements Repository<T> {
   @Override public void deleteById(String id) { delegate.deleteById(id); persist(); }
 
   private void load() {
-    if (!Files.exists(file)) return;
+    if (!Files.exists(file) || isEmpty(file)) return;
     try {
       JavaType listType = mapper.getTypeFactory().constructCollectionType(List.class, type);
       List<T> values = mapper.readValue(file.toFile(), listType);
       for (T value : values) delegate.save(value);
     } catch (IOException | RuntimeException e) {
       throw new DataPersistenceException("Unable to read repository JSON: " + file, e);
+    }
+
+  }
+  private boolean isEmpty(Path path) {
+    try {
+      return Files.size(path) == 0;
+    } catch (IOException e) {
+      throw new DataPersistenceException("Unable to inspect repository JSON: " + file, e);
     }
   }
   private void persist() {

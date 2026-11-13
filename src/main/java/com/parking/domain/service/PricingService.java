@@ -28,8 +28,11 @@ public class PricingService {
     List<PricingLineItem> items = new ArrayList<>();
     for (PricingStrategy strategy : strategies) {
       session.setCurrentAmount(amount);
-      BigDecimal next = strategy.calculate(session).setScale(2, RoundingMode.HALF_UP);
-      items.add(new PricingLineItem(strategy.getClass().getSimpleName().replace("Strategy", ""), next.subtract(amount)));
+      BigDecimal next = strategy.calculate(session).max(BigDecimal.ZERO).setScale(2, RoundingMode.HALF_UP);
+      String name = strategy.getClass().getSimpleName().replace("Strategy", "");
+      BigDecimal lineAmount = next.subtract(amount);
+      if ("EvDiscount".equals(name) && next.signum() == 0) lineAmount = BigDecimal.ZERO.setScale(2);
+      items.add(new PricingLineItem(name, lineAmount));
       amount = next;
     }
     session.setCurrentAmount(amount);
