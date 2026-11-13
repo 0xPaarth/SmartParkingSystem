@@ -12,4 +12,10 @@ public final class SidebarNavController extends BaseController {
   private void logout() {
     navigationManager.navigateTo(NavigationManager.LOGIN);
   }
+
+  @FXML private void openSlotMap() { navigationManager.navigateTo(NavigationManager.SLOT_MAP); }
+  @FXML private void openReservations() { navigationManager.navigateTo(NavigationManager.RESERVATION); }
+  @FXML private void openCheckIn() { navigationManager.navigateTo(NavigationManager.CHECK_IN); }
+  @FXML private void openCheckout() { navigationManager.navigateTo(NavigationManager.CHECKOUT); }
+  @FXML private void openTransactions() { navigationManager.navigateTo(NavigationManager.TRANSACTIONS); }
 }

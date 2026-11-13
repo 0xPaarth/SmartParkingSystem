@@ -15,6 +15,11 @@ public final class NavigationManager {
   public static final String DRIVER_DASHBOARD = "driver-dashboard";
   public static final String ATTENDANT_DASHBOARD = "attendant-dashboard";
   public static final String ADMIN_DASHBOARD = "admin-dashboard";
+  public static final String SLOT_MAP = "slot-map";
+  public static final String RESERVATION = "reservation";
+  public static final String CHECK_IN = "check-in";
+  public static final String CHECKOUT = "checkout";
+  public static final String TRANSACTIONS = "transactions";
 
   private final Stage stage;
   private String currentView;

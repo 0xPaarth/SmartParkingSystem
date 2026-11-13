@@ -5,10 +5,11 @@
 <VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.parking.app.controller.SidebarNavController"
       spacing="10" prefWidth="220" styleClass="sidebar">
   <Label text="PARKING" styleClass="sidebar-brand"/>
-  <Button text="Overview" maxWidth="Infinity" styleClass="nav-button"/>
-  <Button text="Sessions" maxWidth="Infinity" styleClass="nav-button"/>
-  <Button text="Reservations" maxWidth="Infinity" styleClass="nav-button"/>
-  <Button text="Payments" maxWidth="Infinity" styleClass="nav-button"/>
+  <Button text="Slot map" maxWidth="Infinity" onAction="#openSlotMap" styleClass="nav-button"/>
+  <Button text="Check in" maxWidth="Infinity" onAction="#openCheckIn" styleClass="nav-button"/>
+  <Button text="Reservations" maxWidth="Infinity" onAction="#openReservations" styleClass="nav-button"/>
+  <Button text="Check out &amp; payment" maxWidth="Infinity" onAction="#openCheckout" styleClass="nav-button"/>
+  <Button text="Transactions" maxWidth="Infinity" onAction="#openTransactions" styleClass="nav-button"/>
   <VBox VBox.vgrow="ALWAYS"/>
   <Button text="Log out" maxWidth="Infinity" onAction="#logout" styleClass="nav-button"/>
 </VBox>
