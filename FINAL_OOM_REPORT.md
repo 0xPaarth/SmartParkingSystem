@@ -1,17 +1,15 @@
 # Smart Parking Management System
 ## Object-Oriented Modelling and Design Project Report
 
-**University/Department:** ______________________________  
-**Course:** Object-Oriented Modelling and Design  
+**University:** Indian Institute of Information Technology Allahabad 
+**Course:** Object-Oriented Methodologies  
 **Group Members:**  
-1. ______________________________  
-2. ______________________________  
-3. ______________________________  
-4. ______________________________  
-
+1. Paarth Arora IIT2025280
+2. Mannat Jain IIT2025262  
+3. Kajal Jayaswal IIT2025287 
+ 
 **Project Repository:** SmartParkingSystem  
 **Technology:** Java 17, JavaFX 21, Maven  
-**Submission Date:** ______________________________
 
 ## Abstract
 
