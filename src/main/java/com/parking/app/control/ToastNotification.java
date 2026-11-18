@@ -2,6 +2,7 @@ package com.parking.app.control;
 
 import com.parking.app.events.NotificationEvent;
 import javafx.animation.PauseTransition;
+import javafx.animation.TranslateTransition;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -12,6 +13,20 @@ import javafx.util.Duration;
 
 public final class ToastNotification {
   private ToastNotification() {}
+  public static void showText(Window owner, String title, String message) {
+    if (owner == null) return;
+    VBox content = new VBox(4, new Label(title), new Label(message));
+    content.setAlignment(Pos.CENTER_LEFT);
+    content.getStyleClass().addAll("toast", "toast-alert");
+    Popup popup = new Popup();
+    popup.getContent().add(content);
+    popup.setAutoHide(true);
+    popup.show(owner, owner.getX() + owner.getWidth() - 360, owner.getY() + owner.getHeight() - 120);
+    TranslateTransition slide = new TranslateTransition(Duration.millis(220), content);
+    slide.setFromX(24);
+    slide.setToX(0);
+    slide.play();
+  }
   public static void show(Window owner, NotificationEvent event) {
     if (owner == null) return;
     VBox content = new VBox(4, new Label(event.title()), new Label(event.message()));

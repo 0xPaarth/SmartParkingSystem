@@ -2,6 +2,7 @@ package com.parking.app.controller;
 
 import com.parking.app.navigation.NavigationManager;
 import com.parking.app.viewmodel.PricingConfigurationViewModel;
+import com.parking.domain.enums.Role;
 import com.parking.domain.enums.SlotType;
 import com.parking.domain.service.AdminService;
 import com.parking.domain.service.PricingService;
@@ -29,6 +30,7 @@ public final class AdminPricingController extends BaseController {
     simulatorResult.textProperty().bind(viewModel.simulatorResultProperty());
   }
   @FXML private void save() {
+    if (!requireRole(Role.ADMINISTRATOR)) return;
     viewModel.setRate(SlotType.COMPACT, new BigDecimal(compactRate.getText()));
     viewModel.setRate(SlotType.STANDARD, new BigDecimal(standardRate.getText()));
     viewModel.configProperty().get().setSurgeRate(new BigDecimal(surgeRate.getText()));

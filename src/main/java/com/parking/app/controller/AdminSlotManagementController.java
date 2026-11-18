@@ -2,6 +2,7 @@ package com.parking.app.controller;
 
 import com.parking.app.navigation.NavigationManager;
 import com.parking.app.viewmodel.SlotManagementViewModel;
+import com.parking.domain.enums.Role;
 import com.parking.domain.enums.SlotType;
 import com.parking.domain.model.ParkingSlot;
 import com.parking.domain.service.AdminService;
@@ -28,20 +29,24 @@ public final class AdminSlotManagementController extends BaseController {
     slotsTable.setItems(viewModel.slots());
   }
   @FXML private void addSlot() {
+    if (!requireRole(Role.ADMINISTRATOR)) return;
     TextInputDialog dialog = new TextInputDialog();
     dialog.setHeaderText("Slot ID");
     dialog.showAndWait().filter(value -> !value.isBlank())
         .ifPresent(value -> viewModel.save(new ParkingSlot(value, SlotType.STANDARD)));
   }
   @FXML private void deleteSlot() {
+    if (!requireRole(Role.ADMINISTRATOR)) return;
     ParkingSlot selected = slotsTable.getSelectionModel().getSelectedItem();
     if (selected != null) viewModel.delete(selected);
   }
   @FXML private void toggleMaintenance() {
+    if (!requireRole(Role.ADMINISTRATOR)) return;
     ParkingSlot selected = slotsTable.getSelectionModel().getSelectedItem();
     if (selected != null) viewModel.setMaintenance(selected, selected.getStatus().name().equals("ACTIVE"));
   }
   @FXML private void importCsv() {
+    if (!requireRole(Role.ADMINISTRATOR)) return;
     FileChooser chooser = new FileChooser();
     chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV", "*.csv"));
     var file = chooser.showOpenDialog(slotsTable.getScene().getWindow());

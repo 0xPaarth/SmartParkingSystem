@@ -25,6 +25,8 @@ public final class SlotMapController extends BaseController {
       @Override protected void updateItem(ParkingSlot item, boolean empty) {
         super.updateItem(item, empty);
         setText(empty || item == null ? null : item.getId() + "  " + item.getType() + "  [" + item.getState() + "]");
+        setTooltip(empty || item == null ? null : new Tooltip(item.getId() + " | " + item.getType() + " | " + item.getState()));
+        getStyleClass().add("slot-row");
       }
     });
     levelBox.valueProperty().addListener((o, a, b) -> viewModel.levelProperty().set(Integer.parseInt(b)));

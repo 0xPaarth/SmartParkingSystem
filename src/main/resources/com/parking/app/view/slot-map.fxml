@@ -7,6 +7,6 @@
     <Label text="Interactive slot map" styleClass="page-title"/>
     <HBox spacing="8"><Label text="Level"/><ComboBox fx:id="levelBox"/><Label text="Slot type"/><ComboBox fx:id="typeBox"/></HBox>
     <ListView fx:id="slotList" VBox.vgrow="ALWAYS"/>
-    <Label fx:id="detailsLabel" text="Select a slot"/>
+    <Label fx:id="detailsLabel" text="Select a slot" styleClass="slot-detail"/>
   </VBox></center>
 </BorderPane>
