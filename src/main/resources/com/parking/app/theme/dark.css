@@ -21,3 +21,15 @@
 .dashboard-content { -fx-padding: 32; }
 .toast { -fx-background-color: #1f2937; -fx-text-fill: #f9fafb; -fx-border-color: #60a5fa; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 14; }
 .toast-warning { -fx-border-color: #f59e0b; } .toast-alert { -fx-border-color: #f87171; }
+.card, .slot-detail { -fx-background-color: #1f2937; -fx-background-radius: 16; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,.28), 18, .15, 0, 6); }
+.kpi-card { -fx-background-radius: 16; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,.25), 16, .14, 0, 5); }
+.kpi-primary { -fx-background-color: linear-gradient(to bottom right, #1d4ed8, #6d28d9); }
+.kpi-success { -fx-background-color: linear-gradient(to bottom right, #047857, #10b981); }
+.kpi-warn { -fx-background-color: linear-gradient(to bottom right, #b45309, #f59e0b); }
+.kpi-card .label { -fx-text-fill: white; }
+.button { -fx-cursor: hand; -fx-background-radius: 10; -fx-border-radius: 10; }
+.button:hover { -fx-background-color: #2563eb; -fx-effect: dropshadow(gaussian, rgba(96,165,250,.22), 10, .18, 0, 3); -fx-scale-x: 1.02; -fx-scale-y: 1.02; }
+.button:pressed { -fx-scale-x: .98; -fx-scale-y: .98; }
+.text-field, .combo-box { -fx-background-color: #111827; -fx-background-radius: 8; -fx-border-color: #4b5563; -fx-border-radius: 8; -fx-padding: 8; -fx-text-fill: #f9fafb; }
+.error-label { -fx-text-fill: #fecaca; -fx-background-color: #7f1d1d; -fx-background-radius: 8; -fx-padding: 8 10; }
+.success-label { -fx-text-fill: #bbf7d0; -fx-background-color: #14532d; -fx-background-radius: 8; -fx-padding: 8 10; }

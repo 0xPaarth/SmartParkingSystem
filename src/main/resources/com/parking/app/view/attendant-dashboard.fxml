@@ -1,10 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.parking.app.controller.AttendantDashboardController"
             styleClass="dashboard-view">
   <left><fx:include source="sidebar-nav.fxml"/></left>
-  <top><VBox styleClass="top-bar"><Label text="Attendant Dashboard" styleClass="page-title"/><Label text="Monitor the facility and active sessions" styleClass="subtitle"/></VBox></top>
-  <center><VBox spacing="16" styleClass="dashboard-content"><Label text="Operations overview" styleClass="section-title"/><Label text="The slot map and session actions will be introduced in a later phase." wrapText="true"/></VBox></center>
+  <top><VBox styleClass="top-bar"><Label text="Attendant Dashboard" styleClass="page-title"/><Label text="Facility operations" styleClass="subtitle"/></VBox></top>
+  <center><VBox spacing="18" styleClass="dashboard-content">
+    <HBox spacing="12">
+      <VBox HBox.hgrow="ALWAYS" styleClass="kpi-card kpi-primary"><Label text="Live occupancy"/><Label text="Occupancy" styleClass="section-title"/></VBox>
+      <VBox HBox.hgrow="ALWAYS" styleClass="kpi-card kpi-success"><Label text="Active sessions"/><Label text="Processing" styleClass="section-title"/></VBox>
+      <VBox HBox.hgrow="ALWAYS" styleClass="kpi-card kpi-warn"><Label text="Exceptions"/><Label text="Tickets" styleClass="section-title"/></VBox>
+    </HBox>
+    <GridPane hgap="12" vgap="12" styleClass="card">
+      <Button text="Live Occupancy" GridPane.columnIndex="0" onAction="#openOccupancy"/>
+      <Button text="Walk-in Entry" GridPane.columnIndex="1" onAction="#openWalkIn"/>
+      <Button text="Process Exit" GridPane.columnIndex="2" onAction="#openExit"/>
+      <Button text="Lost Ticket Override" GridPane.rowIndex="1" GridPane.columnIndex="0" onAction="#openLostTicket"/>
+      <Button text="Shift Report" GridPane.rowIndex="1" GridPane.columnIndex="1" onAction="#openShiftReport"/>
+    </GridPane>
+  </VBox></center>
 </BorderPane>

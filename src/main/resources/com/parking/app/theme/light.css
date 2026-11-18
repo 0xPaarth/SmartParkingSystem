@@ -1,7 +1,7 @@
 .root {
-  -fx-font-family: "System";
-  -fx-background-color: #f7f8fa;
-  -fx-text-fill: #1f2937;
+  -fx-font-family: "Segoe UI", "System";
+  -fx-background-color: #f4f7fb;
+  -fx-text-fill: #172033;
 }
 .splash-view, .login-view { -fx-background-color: linear-gradient(to bottom right, #eef4ff, #ffffff); -fx-padding: 48; }
 .brand-title { -fx-font-size: 30px; -fx-font-weight: bold; -fx-text-fill: #173b73; }
@@ -20,3 +20,21 @@
 .dashboard-content { -fx-padding: 32; }
 .toast { -fx-background-color: white; -fx-border-color: #2563eb; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 14; -fx-effect: dropshadow(gaussian, rgba(0,0,0,.25), 12, .2, 0, 4); }
 .toast-warning { -fx-border-color: #d97706; } .toast-alert { -fx-border-color: #dc2626; }
+.card { -fx-background-color: white; -fx-background-radius: 16; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(21,32,51,.12), 18, .12, 0, 6); }
+.kpi-card { -fx-background-radius: 16; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(37,99,235,.18), 16, .14, 0, 5); }
+.kpi-primary { -fx-background-color: linear-gradient(to bottom right, #2563eb, #7c3aed); -fx-text-fill: white; }
+.kpi-success { -fx-background-color: linear-gradient(to bottom right, #059669, #34d399); -fx-text-fill: white; }
+.kpi-warn { -fx-background-color: linear-gradient(to bottom right, #d97706, #fbbf24); -fx-text-fill: white; }
+.kpi-card .label { -fx-text-fill: white; }
+.button { -fx-cursor: hand; -fx-background-radius: 10; -fx-border-radius: 10; -fx-scale-x: 1; -fx-scale-y: 1; }
+.button:hover { -fx-background-color: #1d4ed8; -fx-effect: dropshadow(gaussian, rgba(37,99,235,.25), 10, .18, 0, 3); -fx-scale-x: 1.02; -fx-scale-y: 1.02; }
+.button:pressed { -fx-scale-x: .98; -fx-scale-y: .98; }
+.button:focused, .text-field:focused, .combo-box:focused { -fx-effect: dropshadow(gaussian, rgba(37,99,235,.28), 8, .18, 0, 0); }
+.text-field, .combo-box { -fx-background-color: white; -fx-background-radius: 8; -fx-border-color: #d0d5dd; -fx-border-radius: 8; -fx-padding: 8; }
+.error-label { -fx-text-fill: #b42318; -fx-background-color: #fef3f2; -fx-background-radius: 8; -fx-padding: 8 10; }
+.success-label { -fx-text-fill: #067647; -fx-background-color: #ecfdf3; -fx-background-radius: 8; -fx-padding: 8 10; }
+.table-row-cell:hover { -fx-background-color: #eff6ff; }
+.table-row-cell:selected { -fx-background-color: #dbeafe; -fx-text-fill: #172033; }
+.slot-detail { -fx-background-color: white; -fx-background-radius: 16; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(21,32,51,.15), 18, .12, -4, 5); }
+.slot-row { -fx-background-radius: 10; -fx-padding: 10 12; }
+.slot-row:hover { -fx-background-color: #dbeafe; -fx-scale-x: 1.01; -fx-scale-y: 1.01; }

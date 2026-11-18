@@ -23,6 +23,9 @@ public final class AdminDashboardController extends BaseController {
         new javafx.scene.chart.XYChart.Data<>("Occupied", viewModel.occupiedProperty().get()),
         new javafx.scene.chart.XYChart.Data<>("Available", viewModel.availableProperty().get()))));
     slotTypesChart.getData().add(new PieChart.Data("Configured slots", viewModel.occupiedProperty().get() + viewModel.availableProperty().get()));
+    revenueChart.setAnimated(true);
+    occupancyChart.setAnimated(true);
+    slotTypesChart.setAnimated(true);
   }
   @FXML private void openSlots() { navigationManager.navigateTo(NavigationManager.ADMIN_SLOTS); }
   @FXML private void openPricing() { navigationManager.navigateTo(NavigationManager.ADMIN_PRICING); }

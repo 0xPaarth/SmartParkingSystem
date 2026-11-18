@@ -5,12 +5,20 @@
 <VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.parking.app.controller.SidebarNavController"
       spacing="10" prefWidth="220" styleClass="sidebar">
   <Label text="PARKING" styleClass="sidebar-brand"/>
-  <Button text="Slot map" maxWidth="Infinity" onAction="#openSlotMap" styleClass="nav-button"/>
-  <Button text="Check in" maxWidth="Infinity" onAction="#openCheckIn" styleClass="nav-button"/>
-  <Button text="Reservations" maxWidth="Infinity" onAction="#openReservations" styleClass="nav-button"/>
-  <Button text="Check out &amp; payment" maxWidth="Infinity" onAction="#openCheckout" styleClass="nav-button"/>
-  <Button text="Transactions" maxWidth="Infinity" onAction="#openTransactions" styleClass="nav-button"/>
-  <Button text="Notifications" maxWidth="Infinity" onAction="#openNotifications" styleClass="nav-button"/>
+  <Button fx:id="slotMapButton" text="Live Occupancy" maxWidth="Infinity" onAction="#openSlotMap" styleClass="nav-button"/>
+  <Button fx:id="checkInButton" text="Self / Walk-in Entry" maxWidth="Infinity" onAction="#openCheckIn" styleClass="nav-button"/>
+  <Button fx:id="reservationsButton" text="My Reservations" maxWidth="Infinity" onAction="#openReservations" styleClass="nav-button"/>
+  <Button fx:id="makeReservationButton" text="Make Reservation" maxWidth="Infinity" onAction="#openMakeReservation" styleClass="nav-button"/>
+  <Button fx:id="vehiclesButton" text="My Vehicles" maxWidth="Infinity" onAction="#openVehicles" styleClass="nav-button"/>
+  <Button fx:id="checkoutButton" text="Check Out / Process Exit" maxWidth="Infinity" onAction="#openCheckout" styleClass="nav-button"/>
+  <Button fx:id="transactionsButton" text="My Wallet" maxWidth="Infinity" onAction="#openTransactions" styleClass="nav-button"/>
+  <Button fx:id="notificationsButton" text="Notifications" maxWidth="Infinity" onAction="#openNotifications" styleClass="nav-button"/>
+  <Button fx:id="adminSlotsButton" text="Maintenance / Slot Management" maxWidth="Infinity" onAction="#openAdminSlots" styleClass="nav-button"/>
+  <Button fx:id="pricingButton" text="Pricing" maxWidth="Infinity" onAction="#openPricing" styleClass="nav-button"/>
+  <Button fx:id="usersButton" text="Users" maxWidth="Infinity" onAction="#openUsers" styleClass="nav-button"/>
+  <Button fx:id="reportsButton" text="Reports" maxWidth="Infinity" onAction="#openReports" styleClass="nav-button"/>
+  <Button fx:id="lostTicketButton" text="Lost Ticket Override" maxWidth="Infinity" onAction="#openLostTicket" styleClass="nav-button"/>
+  <Button fx:id="shiftReportButton" text="Shift Report" maxWidth="Infinity" onAction="#openShiftReport" styleClass="nav-button"/>
   <VBox VBox.vgrow="ALWAYS"/>
   <Button text="Toggle light/dark theme" maxWidth="Infinity" onAction="#toggleTheme" styleClass="nav-button"/>
   <Button text="Log out" maxWidth="Infinity" onAction="#logout" styleClass="nav-button"/>

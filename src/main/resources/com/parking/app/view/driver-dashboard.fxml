@@ -1,10 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.parking.app.controller.DriverDashboardController"
             styleClass="dashboard-view">
   <left><fx:include source="sidebar-nav.fxml"/></left>
-  <top><VBox styleClass="top-bar"><Label text="Driver Dashboard" styleClass="page-title"/><Label text="Your parking at a glance" styleClass="subtitle"/></VBox></top>
-  <center><VBox spacing="16" styleClass="dashboard-content"><Label text="Welcome, Driver" styleClass="section-title"/><Label text="Your active sessions, reservations, and wallet will appear here in a future phase." wrapText="true"/></VBox></center>
+  <top><VBox styleClass="top-bar"><Label text="Driver Dashboard" styleClass="page-title"/><Label text="My parking, reservations, and wallet" styleClass="subtitle"/></VBox></top>
+  <center><VBox spacing="18" styleClass="dashboard-content">
+    <HBox spacing="12">
+      <VBox HBox.hgrow="ALWAYS" styleClass="kpi-card kpi-primary"><Label text="Next reservation"/><Label text="No reservation" styleClass="section-title"/></VBox>
+      <VBox HBox.hgrow="ALWAYS" styleClass="kpi-card kpi-success"><Label text="Wallet balance"/><Label text="Available" styleClass="section-title"/></VBox>
+      <VBox HBox.hgrow="ALWAYS" styleClass="kpi-card kpi-warn"><Label text="Vehicles"/><Label text="My garage" styleClass="section-title"/></VBox>
+    </HBox>
+    <GridPane hgap="12" vgap="12" styleClass="card">
+      <Button text="Make Reservation" GridPane.columnIndex="0" onAction="#openReservations"/>
+      <Button text="My Reservations" GridPane.columnIndex="1" onAction="#openReservations"/>
+      <Button text="My Wallet" GridPane.columnIndex="2" onAction="#openWallet"/>
+      <Button text="My Vehicles" GridPane.columnIndex="3" onAction="#openVehicles"/>
+      <Button text="Self Check-In" GridPane.rowIndex="1" GridPane.columnIndex="0" onAction="#openCheckIn"/>
+      <Button text="Self Check-Out" GridPane.rowIndex="1" GridPane.columnIndex="1" onAction="#openCheckout"/>
+    </GridPane>
+  </VBox></center>
 </BorderPane>

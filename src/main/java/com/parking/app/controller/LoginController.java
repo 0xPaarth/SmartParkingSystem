@@ -20,6 +20,7 @@ public final class LoginController extends BaseController {
   private void login() {
     viewModel.authenticate(userIdField.getText()).ifPresentOrElse(user -> {
       errorLabel.setText("");
+      navigationManager.setCurrentRole(user.getRole());
       navigationManager.navigateForRole(user.getRole());
     }, () -> errorLabel.setText("Enter a valid seeded user ID, such as driver-1."));
   }

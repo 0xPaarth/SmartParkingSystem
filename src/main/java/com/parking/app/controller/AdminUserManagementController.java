@@ -23,10 +23,12 @@ public final class AdminUserManagementController extends BaseController {
     usersTable.setItems(viewModel.users());
   }
   @FXML private void changeRole() {
+    if (!requireRole(Role.ADMINISTRATOR)) return;
     User user = usersTable.getSelectionModel().getSelectedItem();
     if (user != null) viewModel.changeRole(user, user.getRole() == Role.DRIVER ? Role.ATTENDANT : Role.DRIVER);
   }
   @FXML private void toggleBlacklist() {
+    if (!requireRole(Role.ADMINISTRATOR)) return;
     User user = usersTable.getSelectionModel().getSelectedItem();
     if (user != null && user.getId() != null)
       viewModel.setBlacklisted(user.getId(), !viewModel.isBlacklisted(user.getId()));
